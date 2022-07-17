@@ -1,0 +1,17 @@
+$primary: #ADD8E6;
+$secondary: #e0e2e3;
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+
+$custom-theme-colors:(
+    "lightblue":#ADD8E6
+);
+
+
+
+$theme-colors: map-merge($custom-theme-colors,$theme-colors);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
