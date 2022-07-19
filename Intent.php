@@ -40,29 +40,27 @@ include 'check_post.php';
                         <tbody>
 
                             <!-- Displaying Data from database-->
+                            
+
                             <?php
                             $sql1 = "Select * from `intent`";
-                            $result = mysqli_query($conn, $sql1);
+                            $query = mysqli_query($conn, $sql1);
+                            while($res = mysqli_fetch_array($query)){
 
-                            $row = mysqli_fetch_assoc($result);
-                            if ($result) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $id = $row['id'];
-                                    $datetime = $row['datetime'];
-                                    $entry = $row['entry'];
-                                    $type = $row['type'];
-                                    echo '<tr>
-                            <th scope="row">' . $datetime . '</th>
-                            <td> ' . $entry . '</td>
-                            <td>' . $type . '</td>
                             
-                            <td>
-                                <button class= "btn btn-primary badge-pill" ><a href="edit.php?editid=' . $id . '" class="text-light" > Edit</button>
-                                <button class= "btn btn-danger badge-pill" ><a href="delete.php?deleteid=' . $id . '" class="text-light" >Delete</button>
-                            </td>
-                            
-                        </tr>';
-                                }
+                                echo '<tr>
+                                <th scope="row">' . $res['datetime'] . '</th>
+                                <td> ' . $res['entry'] . '</td>
+                                <td>' . $res['type'] . '</td>
+                                
+                                <td>
+                                    <button class= "btn btn-primary badge-pill" ><a href="edit.php?editid=' . $res['id'] . '" class="text-light" > Edit</button>
+                                    <button class= "btn btn-danger badge-pill" ><a href="delete.php?deleteid=' . $res['id'] . '" class="text-light" >Delete</button>
+                                </td>
+                                
+                            </tr>';
+                                    
+        
                             }
                             ?>
                         </tbody>
@@ -105,9 +103,27 @@ include 'check_post.php';
                                 <!-- Displaying Data from database-->
                                 <?php
                                 $sql1 = "Select * from `intent` where type = 'Health and Fintess'";
-                                $result = mysqli_query($conn, $sql1);
+                                $query = mysqli_query($conn, $sql1);
+                                while($res = mysqli_fetch_array($query)){
 
-                                $row = mysqli_fetch_assoc($result);
+                                  
+                                    echo '<tr>
+                                        <th scope="row">' . $res["datetime"] . '</th>
+                                        <td> ' . $res["entry"] . '</td>
+                                        
+                                        
+                                        <td>
+
+                                            <button class= "btn bg-warning badge-pill" name= "updateHealthandFitness"><a href="edit.php?editid=' . $res["id"]. '" class="text-light text-decoration-none" > Edit</button>
+                                            <button class= "btn btn-danger badge-pill" ><a href="delete.php?deleteid=' . $res["id"]. '" class="text-light text-decoration-none" >Delete</button> 
+                                        </td>
+                                        
+                                    </tr>';
+                                }
+
+
+
+                                /*$row = mysqli_fetch_assoc($result);
                                 if ($result) {
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         $id = $row['id'];
@@ -121,31 +137,20 @@ include 'check_post.php';
                                         
                                         <td>
 
-
-
-
-
-                                        
-
-
-
-
-
-
-
-
-
-
-
-
-
                                             <button class= "btn bg-warning badge-pill" name= "updateHealthandFitness"><a href="edit.php?editid=' . $id . '" class="text-light text-decoration-none" > Edit</button>
                                             <button class= "btn btn-danger badge-pill" ><a href="delete.php?deleteid=' . $id . '" class="text-light text-decoration-none" >Delete</button> 
                                         </td>
                                         
                                     </tr>';
                                     }
-                                }
+
+
+
+                                }*/
+
+
+
+
                                 ?>
                             </tbody>
                         </table>
@@ -217,29 +222,25 @@ include 'check_post.php';
     
                             <!-- Displaying Data from database-->
                             <?php
-                            $sql1 = "Select * from `intent` where type = 'Intellectual Life'";
-                            $result = mysqli_query($conn, $sql1);
+                    
+                          $sql1 = "Select * from `intent` where type = 'Intellectual Life'";
+                          $query = mysqli_query($conn, $sql1);
+                          while($res = mysqli_fetch_array($query)){
 
-                            $row = mysqli_fetch_assoc($result);
-                            if ($result) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $id = $row['id'];
-                                    $datetime = $row['datetime'];
-                                    $entry = $row['entry'];
-                                    
-                                    echo '<tr>
-                                        <th scope="row">' . $datetime . '</th>
-                                        <td> ' . $entry . '</td>
-                                        
-                                        
-                                        <td>
-                                            <button class= "btn btn-warning badge-pill " ><a href="edit.php?editid=' . $id . '" class="text-light text-decoration-none" > Edit</button>
-                                            <button class= "btn btn-danger badge-pill " ><a href="delete.php?deleteid=' . $id . '" class="text-light text-decoration-none" >Delete</button>
-                                        </td>
-                                        
-                                    </tr>';
-                                }
-                            }
+                            
+                              echo '<tr>
+                                  <th scope="row">' . $res["datetime"] . '</th>
+                                  <td> ' . $res["entry"] . '</td>
+                                  
+                                  
+                                  <td>
+
+                                      <button class= "btn bg-warning badge-pill" name= "updateHealthandFitness"><a href="edit.php?editid=' .  $res["id"]. '" class="text-light text-decoration-none" > Edit</button>
+                                      <button class= "btn btn-danger badge-pill" ><a href="delete.php?deleteid=' . $res["id"] . '" class="text-light text-decoration-none" >Delete</button> 
+                                  </td>
+                                  
+                              </tr>';
+                          }
                             ?>
                             </tbody>
                         </table>
