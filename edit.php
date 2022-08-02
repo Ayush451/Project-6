@@ -1,25 +1,13 @@
 <?php
 include 'connect.php';
-$id =$_GET['editid'];
-$sql= "Select * from `intent` where id=$id";
-$result=mysqli_query($conn,$sql);
-$row=mysqli_fetch_assoc($result);
-$entry = $row['entry'];
 
-/*if(isset($id)){
-    $id =$_GET['editid'];  
-    $query = "SELECT * FROM intent WHERE id='$id'";
-    $query_run = mysqli_query($conn, $query);
-
-    if(mysqli_num_rows($query_run)>0){
-        foreach($query_run as $row){
-            echo $row['entry'];
-        }
+if(isset($_GET["action"]) == TRUE AND $_GET["action"] == "edit"){
+    $id=$_GET["id"];	
+    $sql= "Select * from `intent` where id=$id";
+    $result=mysqli_query($conn,$sql);
+    $row=mysqli_fetch_assoc($result);
+    $entry = $row['entry'];
     }
-    else{
-        echo "No Record Found";
-    }
-}*/
 
 
 //Edit button is clicked
@@ -27,11 +15,11 @@ if(isset($_POST['edit'])){
 
 $dateregistered = date("Y-m-d H:i:s");
 $entry = $_POST['entry'];
-$type = 'Health and Fintess';
+
 
 
 // Updating Data 
-$sql = "update `intent` set id = $id, datetime='$dateregistered',entry='$entry',type='$type'
+$sql = "update `intent` set id = $id, datetime='$dateregistered',entry='$entry'
 where id='$id'";
 
 $result = mysqli_query($conn, $sql);
@@ -59,9 +47,11 @@ $result = mysqli_query($conn, $sql);
 
     <div class="container my-5 px-5">
         <div class="mb-3">
-            <h2 class="text-center"> EDIT - Health and Fitness </h2>
+            <h2 class="text-center"> EDIT -  </h2>
         </div>
     </div>
+
+
     
 
     <div class="container my-5 px-5">
@@ -71,11 +61,23 @@ $result = mysqli_query($conn, $sql);
                     <div class="col-sm border border-3 border-primary m-3">
                     
                         <p class="p-5">
-                        
-                            <label>- What do you want to weigh? </label><br>
-                            <label>- How do you want to feel?</label> <br>
-                            <label>- When do you want to complete your first marathon? </label>
-                        
+                        <?php
+                        require ("connect.php");
+                        $sql="SELECT * FROM " . $dbname . ".intent_headings";
+                        $result=$conn->query($sql);
+
+                        $eachIntent=[];
+                        $x=0;
+                        while($row=$result->fetch_assoc()){
+                            $eachIntent[$x] = $row;
+                            $x=$x+1;
+                        }
+                        $conn->close();
+
+                  ?>
+                  
+                         
+                            <label id= <?php '" . $z . "textHeading'?>> <?php echo $eachIntent["questions"] ?> </label>                        
                         </p>
 
                     </div>      
@@ -89,7 +91,7 @@ $result = mysqli_query($conn, $sql);
                     <button type="submit" class="btn btn-primary" name="edit">Update</button>      
                 </div>
 
-
+                
 
             </form>
             </span>
