@@ -91,7 +91,7 @@ if(isset ($_POST['type']) > 0 ){
                                 for($y=0;$y<sizeof($data);$y++){
                                 
                                 echo "<tr>";
-                                echo "<td>" . $data[$y]["datetime"] . "</td><td>" . $data[$y]["entry"] . "</td><td> ". $data[$y]["type"] ."</td><td> <button><a href='intent.php?id=" . $data[$y]["id"] . "&action=delete'>Delete</a></button>   <button><a href='edit.php?id=" . $data[$y]["id"] . "&action=edit'>Edit</a></button></td></tr>";
+                                echo "<td>" . $data[$y]["datetime"] . "</td><td>" . $data[$y]["entry"] . "</td><td> ". $data[$y]["type"] ."</td><td> <button><a href='intent.php?id=" . $data[$y]["id"] . "&action=delete'>Delete</a></button>   <button><a href='edit.php?id=" . $data[$y]["id"] . "&action=edit&type=". $data[$y]["type"] ."'>Edit</a></button></td></tr>";
                                 
                                 }
                                 ?>
@@ -144,7 +144,7 @@ if(isset ($_POST['type']) > 0 ){
                                                 if($data[$y]["type"] == $eachIntent[$x]["intent"]){  // show entry
                                                  
                                     
-                                                    echo "<td>" . $data[$y]["datetime"] . "</td><td>" . $data[$y]["entry"] . "</td><td> <button><a href='intent.php?id=" . $data[$y]["id"] . "&action=delete'>Delete</a></button>  <button ><a href='edit.php?id=" . $data[$y]["id"] . "&action=edit'>Edit</a></button></td></tr>";
+                                                    echo "<td>" . $data[$y]["datetime"] . "</td><td>" . $data[$y]["entry"] . "</td><td> <button><a href='intent.php?id=" . $data[$y]["id"] . "&action=delete'>Delete</a></button>  <button ><a href='edit.php?id=" . $data[$y]["id"] . "&action=edit&type=". $data[$y]["type"] ."'>Edit</a></button></td></tr>";
                                                     ?>
                                                     <?php
                                                 }
@@ -161,7 +161,14 @@ if(isset ($_POST['type']) > 0 ){
                                         
                                     </div>
                                 </div>
-                    
+                                
+                                        <div class="container my-5 px-5">
+                                            <div class="col-sm  text-center p-4">
+                                                <?php echo '<img height="350" width="850" src="data:image;base64,'.base64_encode($eachIntent[$x]["images"]).'">';?>
+
+                                            </div>
+
+                                        </div>
                                
                              
                     
@@ -196,10 +203,10 @@ if(isset ($_POST['type']) > 0 ){
                                                 name= <?php '" . $z . "txtsubmit'?>
                                                 type=" submit" class="btn btn-success" >Submit Goal Notation</button>
                                         </div>
-                    
-                                        
-                                            
                                         </form>  
+
+
+                                        
                                         <div class="border-top my-3"></div>
                                     </div>    
                                     

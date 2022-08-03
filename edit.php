@@ -7,7 +7,18 @@ if(isset($_GET["action"]) == TRUE AND $_GET["action"] == "edit"){
     $result=mysqli_query($conn,$sql);
     $row=mysqli_fetch_assoc($result);
     $entry = $row['entry'];
-    }
+}
+
+$questions = '';
+$headings = '';
+if(isset($_GET["type"]) == TRUE){
+    $type = $_GET["type"];    
+    $sql = "Select * from `intent_headings` where intent='$type'";
+    $result = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($result);
+    $questions = $row['questions'];
+    $headings = $row['intent'];
+}
 
 
 //Edit button is clicked
@@ -38,7 +49,7 @@ $result = mysqli_query($conn, $sql);
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>User Intent - Ayush </title>
-        <link href="/css/style.min.css" rel="stylesheet">  
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
   <body>
 <section>
@@ -47,7 +58,7 @@ $result = mysqli_query($conn, $sql);
 
     <div class="container my-5 px-5">
         <div class="mb-3">
-            <h2 class="text-center"> EDIT -  </h2>
+            <h2 class="text-center"> EDIT - <?php echo $headings?> </h2>
         </div>
     </div>
 
@@ -61,23 +72,7 @@ $result = mysqli_query($conn, $sql);
                     <div class="col-sm border border-3 border-primary m-3">
                     
                         <p class="p-5">
-                        <?php
-                        require ("connect.php");
-                        $sql="SELECT * FROM " . $dbname . ".intent_headings";
-                        $result=$conn->query($sql);
-
-                        $eachIntent=[];
-                        $x=0;
-                        while($row=$result->fetch_assoc()){
-                            $eachIntent[$x] = $row;
-                            $x=$x+1;
-                        }
-                        $conn->close();
-
-                  ?>
-                  
-                         
-                            <label id= <?php '" . $z . "textHeading'?>> <?php echo $eachIntent["questions"] ?> </label>                        
+                            <label id=""> <?php echo $questions?> </label>  
                         </p>
 
                     </div>      
